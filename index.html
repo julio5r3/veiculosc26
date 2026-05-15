@@ -1,169 +1,460 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Verificação Humana</title>
-
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial,sans-serif;
-}
-
-body{
-  background:#f3f4f6;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.box{
-  width:360px;
-  background:white;
-  border-radius:16px;
-  padding:30px;
-  box-shadow:0 8px 25px rgba(0,0,0,0.12);
-}
-
-.title{
-  font-size:22px;
-  font-weight:bold;
-  margin-bottom:10px;
-  color:#111827;
-}
-
-.subtitle{
-  color:#6b7280;
-  font-size:14px;
-  margin-bottom:25px;
-}
-
-.verify-area{
-  border:2px solid #d1d5db;
-  border-radius:12px;
-  padding:18px;
-  display:flex;
-  align-items:center;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.verify-area:hover{
-  border-color:#3b82f6;
-}
-
-.checkbox{
-  width:28px;
-  height:28px;
-  border:2px solid #9ca3af;
-  border-radius:6px;
-  margin-right:15px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:18px;
-  color:white;
-  transition:0.3s;
-}
-
-.label{
-  font-size:16px;
-  color:#111827;
-}
-
-.footer{
-  margin-top:18px;
-  text-align:center;
-  font-size:12px;
-  color:#9ca3af;
-}
-
-.loading{
-  display:none;
-  margin-top:20px;
-  text-align:center;
-  color:#3b82f6;
-  font-size:14px;
-}
-
-.spinner{
-  width:22px;
-  height:22px;
-  border:3px solid #dbeafe;
-  border-top:3px solid #2563eb;
-  border-radius:50%;
-  margin:0 auto 10px;
-  animation:spin 1s linear infinite;
-}
-
-@keyframes spin{
-  100%{
-    transform:rotate(360deg);
-  }
-}
-
-.success{
-  background:#22c55e;
-  border-color:#22c55e;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Atacadao Jp - Sua loja de armarinho, utilidades e variedades em Açailândia-MA. Comércio varejista de artigos de armarinho com mais de 6 anos de tradição e inovação.">
+    <title>Atacadao Jp | Magazine Inova LTDA - Armarinho e Variedades</title>
+    
+    <!-- Bootstrap 5 CSS + Icons + Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Google Fonts para tipografia moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background-color: #fefcf5;
+            scroll-behavior: smooth;
+        }
+        /* Gradientes e cores inovadoras */
+        :root {
+            --primary: #2A6B4E;
+            --primary-dark: #1E4D38;
+            --secondary: #F4A261;
+            --accent: #E9C46A;
+            --dark-bg: #264653;
+            --light-bg: #FFF8F0;
+            --text-dark: #2C3E2F;
+        }
+        .bg-gradient-hero {
+            background: linear-gradient(135deg, #0f2b24 0%, #1d4a3a 100%);
+        }
+        .btn-primary-custom {
+            background-color: var(--secondary);
+            border: none;
+            color: #1e3a2f;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .btn-primary-custom:hover {
+            background-color: #e08e3a;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            color: white;
+        }
+        .btn-outline-custom {
+            border: 2px solid var(--secondary);
+            background: transparent;
+            color: var(--secondary);
+            border-radius: 40px;
+            padding: 10px 24px;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+        .btn-outline-custom:hover {
+            background: var(--secondary);
+            color: #1e3a2f;
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s;
+            border-radius: 24px;
+            overflow: hidden;
+            border: none;
+            background: white;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2);
+        }
+        .section-title {
+            font-weight: 800;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 70%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            border-radius: 4px;
+        }
+        .info-card {
+            background: rgba(255,255,240,0.8);
+            backdrop-filter: blur(2px);
+            border-radius: 28px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(244,162,97,0.2);
+            transition: 0.2s;
+        }
+        .info-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .footer {
+            background: #1A3A2E;
+            color: #E9EED9;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+        }
+        .footer a {
+            color: #F4C7A0;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .footer a:hover {
+            color: #FFE3C9;
+            text-decoration: underline;
+        }
+        .navbar-custom {
+            background: rgba(255,255,245,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        .nav-link-custom {
+            font-weight: 600;
+            color: #2C5A42;
+            margin: 0 8px;
+        }
+        .nav-link-custom:hover {
+            color: var(--secondary);
+        }
+        .hero-section {
+            padding: 5rem 0;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.55);
+            z-index: -1;
+        }
+        .info-badge {
+            background: rgba(233,196,106,0.2);
+            backdrop-filter: blur(4px);
+            border-radius: 60px;
+            padding: 6px 16px;
+            font-weight: 500;
+        }
+        .contact-icon {
+            width: 52px;
+            height: 52px;
+            background: #F4F0E6;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            transition: 0.2s;
+        }
+        .contact-icon i {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        .glass-card {
+            background: rgba(255,255,245,0.85);
+            backdrop-filter: blur(6px);
+            border-radius: 32px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,210,0.5);
+        }
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="box">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4" href="index.html" style="color: #1A4D3A;">
+                <i class="fas fa-store me-2" style="color: #F4A261;"></i> Atacadao Jp
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#home">Início</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#sobre">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#produtos">Produtos</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#contato">Contato</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#localizacao">Localização</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <div class="title">
-    Verificação necessária
-  </div>
+    <!-- HERO SECTION com imagem fornecida (primeira imagem) -->
+    <section id="home" class="hero-section" style="background-image: url('https://www.oeste360.com/images/noticias/550/18fbbe340d7dd2f2fe2fb68e68c0e972.jpg'); background-size: cover; background-position: center 40%; margin-top: 76px;">
+        <div class="container py-5">
+            <div class="row align-items-center min-vh-50 py-5">
+                <div class="col-lg-8 text-white">
+                    <span class="info-badge mb-3 d-inline-block text-white bg-dark bg-opacity-40"><i class="fas fa-star-of-life me-1"></i> Mais de 6 anos inovando</span>
+                    <h1 class="display-4 fw-bold mb-3">Variedades que transformam <br> seu dia a dia</h1>
+                    <p class="lead mb-4">Shopping de armarinho, utilidades e muito mais. Qualidade e preço justo em Açailândia - MA.</p>
+                    <a href="#produtos" class="btn btn-primary-custom me-3"><i class="fas fa-tag me-2"></i>Ver Coleções</a>
+                    <a href="#contato" class="btn btn-outline-custom"><i class="fas fa-phone-alt me-2"></i>Fale Conosco</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="subtitle">
-    Confirme que você é humano para continuar.
-  </div>
+    <!-- SEÇÃO SOBRE + DADOS REGISTRO -->
+    <section id="sobre" class="py-5">
+        <div class="container py-4">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title mb-4">Sobre <span style="color:#2D6A4F;">Atacadao Jp</span></h2>
+                    <p class="fs-5 text-secondary-emphasis">Fundada em <strong>14 de maio de 2019</strong>, a Magazine Inova LTDA, sob o nome fantasia <strong>Atacadao Jp</strong>, é referência no comércio varejista de artigos de armarinho no Maranhão. </p>
+                    <p>Com sede em Açailândia, oferecemos produtos que unem tradição e inovação: linhas, tecidos, aviamentos, utilidades domésticas e itens para artesanato. Nosso compromisso é atender com excelência e variedade, sempre com preços acessíveis.</p>
+                    <div class="row mt-4">
+                        <div class="col-sm-6 mb-3">
+                            <div class="info-card h-100">
+                                <i class="fas fa-building"></i>
+                                <h5 class="fw-bold">Razão Social</h5>
+                                <p class="mb-0">Magazine Inova LTDA</p>
+                                <small>CNPJ: 33.619.237/0001-04</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <div class="info-card h-100">
+                                <i class="fas fa-calendar-alt"></i>
+                                <h5 class="fw-bold">Abertura</h5>
+                                <p>14/05/2019 · 6 anos, 11 meses e 24 dias</p>
+                                <small>Situação cadastral: ATIVA</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="glass-card">
+                        <h4 class="fw-bold mb-3"><i class="fas fa-chart-line me-2" style="color:#F4A261;"></i> Atividade principal</h4>
+                        <p><strong>CNAE:</strong> 47.55-5-02 - Comércio varejista de artigos de armarinho</p>
+                        <p>Produtos comercializados: aviamentos, linhas, botões, tecidos para patchwork, artesanato, utilidades para costura e festa. Atendemos tanto o público doméstico quanto pequenos negócios.</p>
+                        <hr>
+                        <div class="d-flex flex-wrap gap-2 mt-2">
+                            <span class="badge bg-light text-dark p-2 rounded-pill"><i class="fas fa-check-circle text-success"></i> Loja física ativa</span>
+                            <span class="badge bg-light text-dark p-2 rounded-pill"><i class="fas fa-truck"></i> Entregas na região</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="verify-area" onclick="startVerification()">
+    <!-- PRODUTOS / DESTAQUES com as 4 imagens fornecidas -->
+    <section id="produtos" class="py-5 bg-light" style="background-color: #FEF7E8 !important;">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Produtos em Destaque</h2>
+                <p class="lead mt-3">Qualidade, criatividade e inovação para inspirar seu projeto</p>
+            </div>
+            <div class="row g-4">
+                <!-- Card 1 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-hover h-100">
+                        <img src="https://www.oeste360.com/images/noticias/550/18fbbe340d7dd2f2fe2fb68e68c0e972.jpg" class="card-img-top" alt="Armarinho e variedades" style="height: 220px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold"><i class="fas fa-thread me-2"></i> Tecidos & Aviamentos</h5>
+                            <p class="card-text">Encontre tecidos de algodão, cetim, linhas, agulhas e botões para moda e artesanato.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-hover h-100">
+                        <img src="https://img77.uenicdn.com/image/upload/v1554311705/category/shutterstock_496857172.jpg" class="card-img-top" alt="Utilidades domésticas" style="height: 220px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold"><i class="fas fa-home me-2"></i> Utilidades Domésticas</h5>
+                            <p class="card-text">Organização, cozinha, limpeza e itens práticos para o lar com design moderno.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-hover h-100">
+                        <img src="https://likemagazine.com.br/midias/2026/02/Cozinha-sob-medida-arquiteta-Cristiane-Schiavoni-foto-Rafael-Renzo-Like-Magazine-1024x683.jpg" class="card-img-top" alt="Cozinha e decoração" style="height: 220px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold"><i class="fas fa-utensils me-2"></i> Cozinha e Gourmet</h5>
+                            <p class="card-text">Itens para cozinha, panelas, faqueiros e acessórios práticos que unem estilo e utilidade.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-hover h-100">
+                        <img src="https://files.sunoresearch.com.br/n/uploads/2019/05/c4ed4445-magazine-luiza.jpg" class="card-img-top" alt="Eletros e variedades" style="height: 220px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold"><i class="fas fa-microchip me-2"></i> Eletros & Inovação</h5>
+                            <p class="card-text">Pequenos eletrodomésticos e acessórios para facilitar o dia a dia com tecnologia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <p class="fst-italic">+ de 1000 itens disponíveis em nossa loja física. Venha conhecer!</p>
+            </div>
+        </div>
+    </section>
 
-    <div class="checkbox" id="checkbox"></div>
+    <!-- SEÇÃO CONTATO E INFORMAÇÕES -->
+    <section id="contato" class="py-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <h2 class="section-title mb-4">Fale com a gente</h2>
+                    <p>Estamos prontos para atender você por e-mail, telefone ou presencialmente. Sua criatividade merece os melhores produtos!</p>
+                    
+                    <div class="mt-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div><strong class="fs-5">Loja física</strong><br> Avenida Bernardo Sayao, 1781 - Centro, Açailândia - MA, CEP 65930-000</div>
+                        </div>
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div><strong class="fs-5">Telefone</strong><br> <a href="tel:+559935246451" class="text-decoration-none text-dark">(99) 3524-6451</a> <span class="badge bg-success ms-2">Ligar agora</span></div>
+                        </div>
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div><strong class="fs-5">E-mail</strong><br> <a href="mailto:pmamelocomercio@hotmail.com" class="text-decoration-none text-dark">pmamelocomercio@hotmail.com</a></div>
+                        </div>
+                    </div>
+                    <!-- Correspondência -->
+                    <div class="info-card mt-3">
+                        <i class="fas fa-inbox"></i>
+                        <h6 class="fw-bold">Para correspondência:</h6>
+                        <p class="mb-0 small">Atacadao Jp Magazine Inova LTDA<br> Avenida Bernardo Sayao 1781, Centro, Açailândia MA - 65930-000</p>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="glass-card bg-white">
+                        <h4 class="fw-bold mb-3"><i class="fas fa-paper-plane me-2" style="color:#F4A261;"></i>Envie uma mensagem</h4>
+                        <form action="mailto:pmamelocomercio@hotmail.com" method="post" enctype="text/plain" class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Nome completo</label>
+                                <input type="text" class="form-control" placeholder="Seu nome" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">E-mail</label>
+                                <input type="email" class="form-control" placeholder="seuemail@exemplo.com" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Assunto</label>
+                                <input type="text" class="form-control" placeholder="Dúvida, sugestão ou pedido">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Mensagem</label>
+                                <textarea class="form-control" rows="4" placeholder="Escreva sua mensagem..."></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary-custom"><i class="fas fa-envelope-open-text me-2"></i> Enviar mensagem</button>
+                                <p class="small text-muted mt-2">*Ao clicar, você abre seu cliente de e-mail.</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="label">
-      Não sou um robô
-    </div>
+    <!-- LOCALIZAÇÃO COM MAPA (iframe) -->
+    <section id="localizacao" class="py-5 bg-light" style="background: #EDEDE0 !important;">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2 class="section-title">Venha nos visitar</h2>
+                <p>Av. Bernardo Sayao, 1781 - Centro, Açailândia/MA. Fácil acesso e estacionamento nas proximidades</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="rounded-4 overflow-hidden shadow">
+                        <iframe src="https://maps.google.com/maps?q=Avenida%20Bernardo%20Sayao%2C%201781%2C%20A%C3%A7ail%C3%A2ndia%2C%20MA&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="mt-3 text-center">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Avenida+Bernardo+Sayao+1781+Açailândia+MA" target="_blank" class="btn btn-outline-custom"><i class="fas fa-directions"></i> Traçar rota</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  </div>
+    <!-- RODAPÉ com links para Política e Termos -->
+    <footer class="footer pt-5 pb-4">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-5">
+                    <h4 class="fw-bold"><i class="fas fa-store"></i> Atacadao Jp</h4>
+                    <p>Magazine Inova LTDA - CNPJ: 33.619.237/0001-04<br>
+                    Desde 2019 transformando o varejo de armarinho em Açailândia.<br>
+                    Situação cadastral: ATIVA | CNAE: 47.55-5-02</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Links úteis</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#sobre"><i class="fas fa-chevron-right me-2"></i>Sobre a empresa</a></li>
+                        <li><a href="#produtos"><i class="fas fa-chevron-right me-2"></i>Produtos</a></li>
+                        <li><a href="#contato"><i class="fas fa-chevron-right me-2"></i>Contato</a></li>
+                        <li><a href="politica.html" target="_blank"><i class="fas fa-shield-alt me-2"></i>Política de Privacidade</a></li>
+                        <li><a href="termos.html" target="_blank"><i class="fas fa-file-contract me-2"></i>Termos de Uso</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Atendimento</h5>
+                    <p><i class="fas fa-clock"></i> Segunda a Sexta: 8h às 18h<br> Sábado: 8h às 13h</p>
+                    <p><i class="fas fa-phone-alt"></i> (99) 3524-6451<br>
+                    <i class="fas fa-envelope"></i> pmamelocomercio@hotmail.com</p>
+                </div>
+            </div>
+            <hr class="mt-4 border-secondary">
+            <div class="text-center pt-3 small">
+                &copy; 2025 Atacadao Jp - Magazine Inova LTDA. Todos os direitos reservados. Site otimizado para campanhas no Google Ads.
+            </div>
+        </div>
+    </footer>
 
-  <div class="loading" id="loading">
-    <div class="spinner"></div>
-    Verificando...
-  </div>
-
-  <div class="footer">
-    Sistema de proteção automatizada
-  </div>
-
-</div>
-
-<script>
-function startVerification(){
-
-  const checkbox = document.getElementById("checkbox");
-  const loading = document.getElementById("loading");
-
-  checkbox.innerHTML = "✓";
-  checkbox.classList.add("success");
-
-  loading.style.display = "block";
-
-  setTimeout(() => {
-
-    // ALTERE O LINK AQUI
-    window.location.href = "https://google.com";
-
-  }, 2500);
-}
-</script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scroll para links internos (opcional, apenas melhoria)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if(href !== "#" && href !== "#!" && href !== "#home" && href !== "#sobre" && href !== "#produtos" && href !== "#contato" && href !== "#localizacao") return;
+                const target = document.querySelector(href);
+                if(target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
