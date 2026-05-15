@@ -1,103 +1,169 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verificação</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Verificação Humana</title>
 
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: Arial, sans-serif;
-    }
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
 
-    body{
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background: linear-gradient(135deg,#0f172a,#1e293b);
-      color:white;
-    }
+body{
+  background:#f3f4f6;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 
-    .card{
-      width:350px;
-      padding:40px;
-      border-radius:20px;
-      background:rgba(255,255,255,0.08);
-      backdrop-filter: blur(10px);
-      text-align:center;
-      box-shadow:0 10px 30px rgba(0,0,0,0.3);
-    }
+.box{
+  width:360px;
+  background:white;
+  border-radius:16px;
+  padding:30px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.12);
+}
 
-    .logo{
-      font-size:28px;
-      font-weight:bold;
-      margin-bottom:15px;
-    }
+.title{
+  font-size:22px;
+  font-weight:bold;
+  margin-bottom:10px;
+  color:#111827;
+}
 
-    .desc{
-      color:#cbd5e1;
-      margin-bottom:30px;
-      line-height:1.5;
-    }
+.subtitle{
+  color:#6b7280;
+  font-size:14px;
+  margin-bottom:25px;
+}
 
-    button{
-      width:100%;
-      padding:15px;
-      border:none;
-      border-radius:12px;
-      background:#3b82f6;
-      color:white;
-      font-size:16px;
-      cursor:pointer;
-      transition:0.3s;
-    }
+.verify-area{
+  border:2px solid #d1d5db;
+  border-radius:12px;
+  padding:18px;
+  display:flex;
+  align-items:center;
+  cursor:pointer;
+  transition:0.3s;
+}
 
-    button:hover{
-      background:#2563eb;
-      transform:scale(1.03);
-    }
+.verify-area:hover{
+  border-color:#3b82f6;
+}
 
-    .loading{
-      margin-top:20px;
-      display:none;
-      color:#93c5fd;
-    }
-  </style>
+.checkbox{
+  width:28px;
+  height:28px;
+  border:2px solid #9ca3af;
+  border-radius:6px;
+  margin-right:15px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:18px;
+  color:white;
+  transition:0.3s;
+}
+
+.label{
+  font-size:16px;
+  color:#111827;
+}
+
+.footer{
+  margin-top:18px;
+  text-align:center;
+  font-size:12px;
+  color:#9ca3af;
+}
+
+.loading{
+  display:none;
+  margin-top:20px;
+  text-align:center;
+  color:#3b82f6;
+  font-size:14px;
+}
+
+.spinner{
+  width:22px;
+  height:22px;
+  border:3px solid #dbeafe;
+  border-top:3px solid #2563eb;
+  border-radius:50%;
+  margin:0 auto 10px;
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+  100%{
+    transform:rotate(360deg);
+  }
+}
+
+.success{
+  background:#22c55e;
+  border-color:#22c55e;
+}
+</style>
 </head>
 <body>
 
-  <div class="card">
-    <div class="logo">Verificação</div>
+<div class="box">
 
-    <div class="desc">
-      Clique no botão abaixo para continuar.
-    </div>
-
-    <button onclick="verificar()">
-      Continuar verificação
-    </button>
-
-    <div class="loading" id="loading">
-      Verificando...
-    </div>
+  <div class="title">
+    Verificação necessária
   </div>
 
-  <script>
-    function verificar() {
-      const loading = document.getElementById("loading");
+  <div class="subtitle">
+    Confirme que você é humano para continuar.
+  </div>
 
-      loading.style.display = "block";
+  <div class="verify-area" onclick="startVerification()">
 
-      setTimeout(() => {
-        // ALTERE AQUI O LINK DE REDIRECIONAMENTO
-        window.location.href = "https://google.com";
-      }, 2000);
-    }
-  </script>
+    <div class="checkbox" id="checkbox"></div>
+
+    <div class="label">
+      Não sou um robô
+    </div>
+
+  </div>
+
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    Verificando...
+  </div>
+
+  <div class="footer">
+    Sistema de proteção automatizada
+  </div>
+
+</div>
+
+<script>
+function startVerification(){
+
+  const checkbox = document.getElementById("checkbox");
+  const loading = document.getElementById("loading");
+
+  checkbox.innerHTML = "✓";
+  checkbox.classList.add("success");
+
+  loading.style.display = "block";
+
+  setTimeout(() => {
+
+    // ALTERE O LINK AQUI
+    window.location.href = "https://google.com";
+
+  }, 2500);
+}
+</script>
 
 </body>
 </html>
